@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+          integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Spring Crud</title>
+</head>
+<body>
+<div class="flex-column">
+    <h4 class="ui header">Login</h4>
+    <div class="ui raised segment">
+        <div th:if="${param.error}">
+            <div class="ui error message">
+                <h4 class="ui header">Invalid credentials</h4>
+            </div>
+        </div>
+        <div th:if="${param.logout}">
+            <div class="ui success message">
+                <h4 class="ui header">You have been logged out</h4>
+            </div>
+        </div>
+        <br>
+        <form class="ui form" id="login_form" method="post" th:action="@{/authenticate}">
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" required/>
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required/>
+            </div>
+            <br>
+            <div class="field">
+                <button type="submit" class="ui green button">
+                    <i class="ui sign in alternate icon"></i>
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

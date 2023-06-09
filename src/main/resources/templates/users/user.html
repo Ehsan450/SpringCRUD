@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+          integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Spring Crud</title>
+</head>
+<body>
+<div class="centered flex-column">
+    <div class="ui raised segment">
+        <div><strong>UserName </strong>
+            <span th:text="${user.username}"></span></div>
+        <br>
+        <div><strong>Role </strong>
+            <span th:text="${user.authority}"></span></div>
+        <br>
+    </div>
+    <br>
+    <div class="centered">
+        <a class="ui blue button" th:href="@{'/users/update/' + ${user.username}}">Update</a>
+        <a class="ui grey button" th:href="@{/users/}">Go Back</a>
+    </div>
+</div>
+<div class="ui grey button" onclick="handleLogout()">
+    <i class="ui sign out alternate icon"></i>
+    Logout
+</div>
+<form method="post" th:action="@{/logout}" hidden>
+    <input type="submit" id="logoutButton"/>
+</form>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+.text-red {
+    color: #b60009;
+}
+
+.text-green {
+    color: #339d00;
+}
+
+.text-blue {
+    color: #00949d;
+}
+
+.centered {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
