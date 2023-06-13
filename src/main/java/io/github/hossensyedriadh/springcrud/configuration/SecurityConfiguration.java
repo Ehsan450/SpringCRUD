@@ -1,5 +1,6 @@
 package io.github.hossensyedriadh.springcrud.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,18 +9,21 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
+    private final CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    public SecurityConfiguration(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
@@ -31,7 +35,7 @@ public class SecurityConfiguration {
                 .and().logout().logoutUrl("/logout")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true).clearAuthentication(true).logoutSuccessUrl("/login?logout")
-                .and().userDetailsService(this.userDetailsService());
+                .and().userDetailsService(this.userDetailsService);
 
         return httpSecurity.build();
     }
@@ -39,7 +43,7 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(this.userDetailsService())
+                .userDetailsService(this.userDetailsService)
                 .passwordEncoder(this.passwordEncoder())
                 .and().build();
     }
@@ -49,7 +53,7 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+    /*Bean
     public UserDetailsService userDetailsService() {
         UserDetails userDetails = User.withUsername("manoniyospeaker")
                 .password("$2a$10$7MDsCr8fbrxjNTNZyIQrT.IXoV.7lujxQc/ef/geUVfVmulikgPFe")
@@ -62,5 +66,5 @@ public class SecurityConfiguration {
                 .build();
 
         return new InMemoryUserDetailsManager(userDetails, adminInfo);
-    }
+    }*/
 }

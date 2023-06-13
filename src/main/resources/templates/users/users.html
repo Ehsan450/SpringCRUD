@@ -24,7 +24,6 @@
         <tr th:each="user : ${users}">
             <td th:text="${user.username}"></td>
             <td th:text="${user.authority}"></td>
-
             <td>
                 <div style="display: flex; text-align: center; justify-content: flex-start; align-items: flex-start;">
                     <a class="ui green button" th:href="@{'/users/' + ${user.username}}">

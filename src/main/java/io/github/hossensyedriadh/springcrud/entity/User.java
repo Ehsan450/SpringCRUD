@@ -8,6 +8,7 @@ import lombok.Setter;
 import utility.AuthorityEnum;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,13 +21,16 @@ public final class User {
     @Column(name = "username", updatable = false, nullable = false)
     private String username;
 
+    @NotNull
     @Column(name = "password", nullable = false)
     private String password;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "authority", nullable = false)
     private AuthorityEnum authority;
 
+    @NotNull
     @Column(name = "is_enabled", nullable = false)
     private boolean enabled;
 }
