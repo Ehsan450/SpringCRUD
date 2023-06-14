@@ -45,6 +45,14 @@ public class UserController {
 
         return new ModelAndView("users/user");
     }
+    @GetMapping("/update/{username}")
+    public ModelAndView updateForm(@PathVariable("username") String username, Model model) {
+        Optional<User> userOptional = this.userService.user(username);
+
+        userOptional.ifPresent(user -> model.addAttribute("user", user));
+
+        return new ModelAndView("users/update-user");
+    }
 
     @PostMapping("/")
     public ModelAndView save(@ModelAttribute User user) {

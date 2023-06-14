@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+          integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Spring Crud</title>
 </head>
 <body>
+<div class="flex-column">
+    <h4 class="ui header">Add User</h4>
+    <br>
+    <div class="ui raised segment">
+        <form class="ui form" method="post" th:object="${user}" th:action="@{/users/}">
+            <input type="hidden" name="username" id="user" th:field="*{username}"/>
 
+            <div class="required field">
+                <label for="username">UserName</label>
+                <input type="text" name="username" id="username" th:field="*{username}" minlength="5" maxlength="120" required/>
+            </div>
+            <ul>
+                <li th:each="err : ${#fields.errors('username')}" th:text="${err}"
+                    class="text-red"></li>
+            </ul>
+            <div class="field">
+                <div class="two required fields">
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" th:field="*{password}" minlength="5" maxlength="21474"
+                               required/>
+                    </div>
+                    <ul>
+                        <li th:each="err : ${#fields.errors('password')}" th:text="${err}"
+                            class="text-red"></li>
+                    </ul>
+                    <div class="field">
+                        <label for="authority">Authority</label>
+                        <input type="text" name="authority" id="authority" th:field="*{authority}" min="0" required/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="field">
+                <button type="submit" class="ui green button">
+                    <i class="ui save icon"></i>
+                    Save
+                </button>
+                <button type="reset" class="ui grey button">
+                    <i class="ui times icon"></i>
+                    Clear
+                </button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="centered">
+        <a class="ui grey button" th:href="@{/users/}">Go Back</a>
+    </div>
+</div>
+<div class="ui grey button" onclick="handleLogout()">
+    <i class="ui sign out alternate icon"></i>
+    Logout
+</div>
+<form method="post" th:action="@{/logout}" hidden>
+    <input type="submit" id="logoutButton"/>
+</form>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
 </body>
 </html>
