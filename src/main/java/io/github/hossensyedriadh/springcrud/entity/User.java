@@ -9,6 +9,7 @@ import utility.AuthorityEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "users")
 public final class User {
     @Id
+    @Pattern(regexp = "^[a-zA-Z0-9_]+$")
     @Column(name = "username", updatable = false, nullable = false)
     private String username;
 
@@ -33,4 +35,9 @@ public final class User {
     @NotNull
     @Column(name = "is_enabled", nullable = false)
     private boolean enabled;
+
+    @PrePersist
+    private void init() {
+        this.enabled = true;
+    }
 }

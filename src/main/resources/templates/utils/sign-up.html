@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+            integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+          integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Spring Crud</title>
+</head>
+<body>
+<form class="ui form">
+    <!--<div class="field">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+    </div>
+    <br>
+    <div class="field">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+    </div>
+    <br>-->
+    <div class="field">
+        <label for="username">UserName</label>
+        <input type="text" id="username" name="username" placeholder="Username" onchange="validateUsername()" required>
+        <small class="text-red" id="username_not_unique" style="display: none;">Username not
+            available</small>
+    </div>
+    <br>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+    </div>
+    <br>
+    <br>
+    <button class="ui button" type="submit">Submit</button>
+</form>
+<script type="text/javascript" th:src="@{/js/sign-up.js}"></script>
+</body>
+</html>

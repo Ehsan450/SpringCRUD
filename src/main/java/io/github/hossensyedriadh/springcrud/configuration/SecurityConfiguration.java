@@ -27,7 +27,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and().authorizeRequests().antMatchers("/**/*.*", "/webjars/**", "/resources/**", "/login/**", "/actuator/**").permitAll()
+                .and().authorizeRequests().antMatchers("/**/*.*", "/webjars/**", "/open/**", "/sign-up/**", "/resources/**", "/login/**", "/actuator/**").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/authenticate").
                 failureUrl("/login?error")
